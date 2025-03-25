@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import axios from 'axios';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [city, setCity] = useState('');
+  const [weather, setWeather] = useState(null);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+  const apiKey = 'e5e7b343bdafbd282bc4eb37a3ba050e';
+  const getWeather = async () => {
+    if (city) {
+      try {
+        const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apikey}`
+      );
+      setWeather(response.data);
+      }
+      catch (error) {
+        alert('city not found! Please try again.');
+      }
+    }
+  }
+
+ return (
+  <div style={{fontFamily: 'Arial, sans-serif', textAlign: 'center', marginLeft: '80vh' , padding: '0'}}>
+    <h1>Weather Dashboard</h1>
+    <input
+    type="text"
+    placeholder="Enter city name"
+    value={city}
+    onChange={(e) => setCity(e.target.value)}
+    style={{ padding: '10px', fontSize: '16px'}}
+    />
+    <button
+    onClick={getWeather}
+    style={{
+      padding: '10px 20px',
+      fontSize: '16 px',
+      marginLeft: '10px',
+      backgroundColor: '#007BFF'
+      color: '#fff',
+      border: 'none',
+      borderRadius: '5px',
+    }}
+    >
+      Get Weather
+    </button>
+    {weather && (
+      <div style={{ marginTop: '20px'}}>
+        <h2>{weather.name}</h2>
+        <p>Temperature: {weather.main.temp}°C</p>
+        <p>Condition: {weather.weather[].description}</p>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+    )}
+    </div>
+
+ );
 }
 
-export default App
+export default App;
