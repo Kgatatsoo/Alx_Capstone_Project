@@ -36,8 +36,8 @@ function App() {
       padding: '10px 20px',
       fontSize: '16 px',
       marginLeft: '10px',
-      backgroundColor: '#007BFF'
-      color: '#fff',
+      backgroundColor: '#007BFF' ,
+      color: '#fff' ,
       border: 'none',
       borderRadius: '5px',
     }}
@@ -48,7 +48,7 @@ function App() {
       <div style={{ marginTop: '20px'}}>
         <h2>{weather.name}</h2>
         <p>Temperature: {weather.main.temp}°C</p>
-        <p>Condition: {weather.weather[].description}</p>
+        <p>Condition: {weather.weather[0].description}</p>
       </div>
 
     )}
