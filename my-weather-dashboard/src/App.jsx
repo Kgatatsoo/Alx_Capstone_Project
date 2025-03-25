@@ -34,7 +34,7 @@ function App() {
     onClick={getWeather}
     style={{
       padding: '10px 20px',
-      fontSize: '16 px',
+      fontSize: '16px',
       marginLeft: '10px',
       backgroundColor: '#007BFF' ,
       color: '#fff' ,
